@@ -1,23 +1,71 @@
-<div class="recipe-detail">
-  <h2>{{ recipe.nombre }}</h2>
-  <img
-    class="recipe-detail-img"
-    [src]="recipe.imagen"
-    alt="{{ recipe.imagen }}"
-  />
-  <p><strong>Porciones:</strong> {{ recipe.porciones }}</p>
-  <p><strong>Tiempo:</strong> {{ recipe.tiempo_minutos }} min</p>
-  <h3>Ingredientes</h3>
-  <app-ingredient-list
-    [ingredients]="recipe.ingredientes"
-  ></app-ingredient-list>
+<body>
+  
+<div class="container mt-4">
+  <h1 class="text-center mt-4 mb-4 fw-bold">
+  Recetas uniandes
+</h1>
+  <div class="card">
+    <div class="card-body">
+      <!-- Header de la receta -->
+      <div class="text-center mb-4">
+        <h2>{{ recipe.nombre }}</h2>
+        <hr>
+        <div class="row">
+          <div class="col-md-3">
+            <strong>Porciones {{ recipe.porciones }}</strong>
+          </div>
+          <div class="col-md-3">
+            <strong>Tiempo {{ recipe.tiempo_minutos }} min</strong>
+          </div>
+          <div class="col-md-3">
+            <strong>Dificultad: {{ recipe.dificultad }}</strong>
+          </div>
+          <div class="col-md-3">
+            <strong>{{ recipe.categoria }}</strong>
+          </div>
+        </div>
+        <hr>
+      </div>
 
-  <h3>Pasos</h3>
-  <ol>
-    @for(step of recipe.pasos; track step){
-    <li>
-      {{ step }}
-    </li>
-    }
-  </ol>
+      <div class="row">
+        <!-- Imagen -->
+        <div class="col-md-6">
+          <img 
+            [src]="recipe.imagen" 
+            alt="{{ recipe.nombre }}"
+            class="img-fluid rounded"
+            style="max-height: 400px;  object-fit: cover;"
+          >
+        </div>
+
+        <!-- Ingredientes -->
+        <div class="col-md-6">
+          <h3>Ingredientes</h3>
+          
+          <app-ingredient-list [ingredients]="recipe.ingredientes"></app-ingredient-list>
+        </div>
+      </div>
+
+      <!-- Pasos -->
+      <div class="mt-4">
+        <h3>Pasos</h3>
+        <ol class="list-group list-group-numbered">
+          @for(step of recipe.pasos; track step; let i = $index){
+          <li class="list-group-item">
+            {{ step }}
+          </li>
+          }
+        </ol>
+      </div>
+
+      <!-- Botón regresar -->
+      <div class="text-center mt-4">
+        <button class="btn btn-secondary" (click)="goBack()">
+          Regresar
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
+
+</body>
